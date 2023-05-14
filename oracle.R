@@ -1,0 +1,56 @@
+#Oracle Connection
+
+install.packages("RODBC")
+library(DBI)
+con <- dbConnect(odbc::odbc(),uid="system",pwd="parag", "oracle", timeout = 10)
+
+
+dbGetQuery(con,'select *from employee ')
+dbGetQuery(con,'select *from department ')
+
+#project
+dbGetQuery(con,'SELECT ENO, NAME FROM EMPLOYEE')
+
+
+
+
+
+#3.CARTESIAN PRODUCT
+dbGetQuery(con,'SELECT *FROM EMPLOYEE CROSS JOIN DEPARTMENT;')
+
+
+#EQUI JOIN
+dbGetQuery(con,'SELECT EMPLOYEE.ENO,EMPLOYEE.NAME,EMPLOYEE.DNO,DEPARTMENT.DNMAE
+FROM 
+  EMPLOYEE
+JOIN 
+  DEPARTMENT ON EMPLOYEE.DNO = DEPARTMENT.DNO')
+
+#left outer join
+dbGetQuery(con,
+           'SELECT 
+EMPLOYEE.ENO,
+EMPLOYEE.NAME,
+EMPLOYEE.DNO,
+DEPARTMENT.DNO,
+DEPARTMENT.DNMAE
+FROM 
+EMPLOYEE
+LEFT OUTER JOIN 
+DEPARTMENT ON EMPLOYEE.DNO = DEPARTMENT.DNO')
+
+#Right outer Join
+dbGetQuery(con,
+           'SELECT 
+EMPLOYEE.ENO,
+EMPLOYEE.NAME,
+EMPLOYEE.DNO,
+DEPARTMENT.DNO,
+DEPARTMENT.DNMAE
+FROM 
+EMPLOYEE
+RIGHT OUTER JOIN 
+DEPARTMENT ON EMPLOYEE.DNO = DEPARTMENT.DNO')
+
+
+
