@@ -11,3 +11,7 @@ coefficients(m)
 coef(m)
 
 abline(m) # this will plot the regression line of y on x
+
+a<-data.frame(x=15)
+result<-predict(m,a)
+print(result)
